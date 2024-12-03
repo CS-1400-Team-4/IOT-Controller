@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class IOTController {
@@ -87,16 +88,28 @@ public abstract class IOTController {
     }
 
     public static InputState getInputStateFromUser() {
-        System.out.println("What is the current time? Input as a number from 0-23: ");
-        int time = scanner.nextInt();
+        int time;
+        try {
+            System.out.println("What is the current time? Input as a number from 0-23: ");
+            time = scanner.nextInt();
+        }
+        catch (InputMismatchException e) {
+            time = -1;
+        }
 
         while (time < 0 || time > 23) {
             System.out.println("Please enter a number from 0-23: ");
             time = scanner.nextInt();
         }
 
-        System.out.println("What is the current month? Input as a number from 0-12: ");
-        int month = scanner.nextInt();
+        int month;
+        try {
+            System.out.println("What is the current month? Input as a number from 0-12: ");
+            month = scanner.nextInt();
+        }
+        catch (InputMismatchException e) {
+            month = -1;
+        }
 
         while (month < 0 || month > 12) {
             System.out.println("Please enter a number from 0-12: ");
